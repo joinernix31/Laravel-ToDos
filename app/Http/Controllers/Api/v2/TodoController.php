@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\v2;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ShowTodoFormRequest;
+use App\Http\Requests\Todos\ShowTodoFormRequest;
 use App\Http\Resources\v2\Todo\TodoResource;
 use App\Models\Todo;
 use App\Repositories\TodosRepository;

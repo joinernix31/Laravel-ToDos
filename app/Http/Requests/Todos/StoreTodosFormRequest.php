@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Todos;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -26,7 +26,7 @@ class StoreTodosFormRequest extends FormRequest
             'category_id' => 'exists:categories,id|numeric',
         ];
     }
-    
+
     public function messages()
     {
         return [

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCategoryFormRequest extends FormRequest
+class ShowCategoryFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,20 @@ class StoreCategoryFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'unique:categories', 'max:25'],
-            'color' => ['required']
+            /*
+            DUDAS
+            -Mandar error a la vista. Al no cumplir validacion
+            -Sintaxis de validacion de FormRequest
+            */
+            'id' =>  'exists:categories,id'
+
         ];
     }
     public function messages(): array
     {
         return[
-            'name.required' => 'El nombre de la categoria es obligatorio',
-            'name.unique' => 'El nombre de la categoria ya existe ',
-            'color.required' => 'El color es obigatorio',
+            'id.required' => 'El id no existe'
         ];
     }
-    
+
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Todos;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteUsersFormRequest extends FormRequest
+class ShowTodoFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,15 @@ class DeleteUsersFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'exists:users,id'
+            //
+            'id' => 'exists:todos,id',
         ];
     }
-    public function messages(){
+    public function messages(): array
+    {
+
         return[
-            'id.exists' => 'El Id del usuario no existe'
+            'id' => 'El ID Existe'
         ];
     }
 }

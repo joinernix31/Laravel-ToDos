@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-//Models
+use App\Http\Requests\Todos\ShowTodoFormRequest;
+use App\Http\Requests\Todos\StoreTodosFormRequest;
+use App\Http\Requests\Todos\UpdateTodosFormRequest;
 use App\Models\Todo;
-use App\Models\Category;
-//FormRequest
-use App\Http\Requests\StoreTodosFormRequest;
-use App\Http\Requests\ShowTodoFormRequest;
-use App\Http\Requests\UpdateTodosFormRequest;
-//Repositories
-use App\Repositories\TodosRepository;
 use App\Repositories\CategoriesRepository;
+use App\Repositories\TodosRepository;
+
+//Models
+//FormRequest
+//Repositories
 
 class TodosController extends Controller
 {
@@ -21,16 +20,16 @@ class TodosController extends Controller
      *
      */
 
-    public function __construct(TodosRepository $todoRepository,CategoriesRepository $categoryRepository) 
+    public function __construct(TodosRepository $todoRepository,CategoriesRepository $categoryRepository)
     {
-        
-        $this->todoRepository = $todoRepository; 
+
+        $this->todoRepository = $todoRepository;
         $this->categoryRepository= $categoryRepository;
-        
+
     }
     // public function __construct(CategoriesRespository $categoryRepository)
     // {
-        
+
     // }
 
      public function store(StoreTodosFormRequest $request) // FormRequest COMPLETED
@@ -40,12 +39,12 @@ class TodosController extends Controller
          $todo->category_id = $request->category_id;
         // $todo->save();
         $this->todoRepository->create($todo);
- 
+
          return redirect()->route('todos.index')->with('success', 'Tarea creada Correctamente');
      }
- 
 
-    public function index (){ 
+
+    public function index (){
         $todos = $this->todoRepository->all();
         $categories = $this->categoryRepository->all();
         //TODO Semana 2 - Listar los todos con su categoría - Eloquent - MOdels que es el with()
@@ -57,7 +56,7 @@ class TodosController extends Controller
 
 
 
-    public function show (ShowTodoFormRequest $request, $id) 
+    public function show (ShowTodoFormRequest $request, $id)
     {
         //TODO Implementar ShowTodoFormRequest COMPLETED
         $todo = $this->todoRepository->show($id);
@@ -69,7 +68,7 @@ class TodosController extends Controller
 
     }
 
-    
+
     public function destroy ($id){ //PENDIENTE
         $todo = $this->todoRepository->destroy($id);
         $todo->delete();
@@ -77,7 +76,7 @@ class TodosController extends Controller
         return redirect()->route('todos.index')->with('success', 'Tarea Borrada Con Exito');
 
     }
-    
+
     public function update (UpdateTodosFormRequest $request, $id){
         $todo = $this->todoRepository->update($id);
         $todo ->title = $request->title;

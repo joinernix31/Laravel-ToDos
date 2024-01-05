@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateTodosFormRequest extends FormRequest
+class StoreCategoryFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,16 @@ class UpdateTodosFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            'title' => 'required',
-            'category_id' => 'required',
+            'name' => ['required', 'unique:categories', 'max:25'],
+            'color' => ['required']
         ];
     }
     public function messages(): array
     {
-        
         return[
-            'title' => 'El Titulo es obligatorio',
-            'category_id' => 'La Categoria es obligatoria',
+            'name.required' => 'El nombre de la categoria es obligatorio',
+            'name.unique' => 'El nombre de la categoria ya existe ',
+            'color.required' => 'El color es obigatorio',
         ];
     }
 

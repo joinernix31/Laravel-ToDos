@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Todos;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DeleteCategoryFormRequest extends FormRequest
+class UpdateTodosFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,6 +23,17 @@ class DeleteCategoryFormRequest extends FormRequest
     {
         return [
             //
+            'title' => 'required',
+            'category_id' => 'required',
         ];
     }
+    public function messages(): array
+    {
+
+        return[
+            'title' => 'El Titulo es obligatorio',
+            'category_id' => 'La Categoria es obligatoria',
+        ];
+    }
+
 }

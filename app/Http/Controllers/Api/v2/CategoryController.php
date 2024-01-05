@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Api\v2;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ShowCategoryFormRequest;
-use App\Models\Category;
-use Illuminate\Http\Request;
-use App\Http\Resources\v2\Category\CategoryResource;
+use App\Http\Requests\Category\ShowCategoryFormRequest;
 use App\Http\Resources\v2\Category\CategoryCollection;
+use App\Http\Resources\v2\Category\CategoryResource;
+use App\Models\Category;
 use App\Repositories\CategoriesRepository;
+use Illuminate\Http\Request;
+
 class CategoryController extends Controller
 {
     /**

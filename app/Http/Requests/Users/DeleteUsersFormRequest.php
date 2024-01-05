@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Users;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCategoryFormRequest extends FormRequest
+class DeleteUsersFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,15 +22,12 @@ class UpdateCategoryFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:25',
-            'color' => 'required|max:7'
+            'id' => 'exists:users,id'
         ];
     }
-    public function messages()
-    {
+    public function messages(){
         return[
-            'name.required' => 'El nombre de la categoria es requerido',
-            'color.required' => 'Debes selecionar un color'
+            'id.exists' => 'El Id del usuario no existe'
         ];
     }
 }

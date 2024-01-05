@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LoginFormRequest extends FormRequest
+class UpdateCategoryFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,15 @@ class LoginFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'password' => 'required|string',
+            'name' => 'required|max:25',
+            'color' => 'required|max:7'
+        ];
+    }
+    public function messages()
+    {
+        return[
+            'name.required' => 'El nombre de la categoria es requerido',
+            'color.required' => 'Debes selecionar un color'
         ];
     }
 }

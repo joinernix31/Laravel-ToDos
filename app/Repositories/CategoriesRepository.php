@@ -43,15 +43,10 @@ class CategoriesRepository
     public function destroy($id)
     {
         $category = $this->model::findOrFail($id);
-        if (!$category) {
-
-            return response()->json(['error' => 'La categoría no existe.'], 404);
-        }
-
         $category->todos()->delete();
         $category->delete();
+        return true;
 
-        return response()->json(['message' => 'Categoría y todos eliminados correctamente.'], 204);
     }
 
 }

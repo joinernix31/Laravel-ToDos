@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\DeleteCategoryFormRequest;
-use App\Http\Requests\ShowCategoryFormRequest;
-use App\Http\Requests\UpdateCategoryFormRequest;
+use App\Http\Requests\Category\DeleteCategoryFormRequest;
+use App\Http\Requests\Category\ShowCategoryFormRequest;
+use App\Http\Requests\Category\UpdateCategoryFormRequest;
 use App\Http\Resources\v1\Category\CategoryResource;
 use App\Repositories\CategoriesRepository;
 use Illuminate\Http\Request;
@@ -45,7 +45,7 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryFormRequest $request, $id)
     {
-        $input = $request->validate();
+        $input = $request->validated();
         $category = $this->categoryRepository->update($id, $input);
         return new CategoryResource($category);
 
@@ -56,20 +56,32 @@ class CategoryController extends Controller
      */
     public function destroy(DeleteCategoryFormRequest $request, $id)
     {
+        // Utiliza $id en lugar de $request->id
         $category = $this->categoryRepository->destroy($id);
 
-        if ($category) {
-            $data = [
-                'Id' => $id,
-                'Delete' => true
-            ];
-            return response($data, 204);
-        } else {
-            $data = [
-                'Id' => $request->id,
-                'Delete' => false
-            ];
-            return response($data, 404);
-        }
+        $data = [
+            'Id' => $id,
+            'Delete' => $category ? true : false,
+        ];
+
+        return response()->json($data, $category ? 200 : 404);
     }
+//    public function destroy(DeleteCategoryFormRequest $request, $id)
+//    {
+//        $category = $this->categoryRepository->destroy($id);
+//
+//        if ($category) {
+//            $data = [
+//                'Id' => $request->id,
+//                'Delete' => true
+//            ];
+//            return response($data, 200);
+//        } else {
+//            $data = [
+//                'Id' => $request->id,
+//                'Delete' => false
+//            ];
+//            return response($data, 404);
+//        }
+//    }
 }
